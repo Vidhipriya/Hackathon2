@@ -85,7 +85,7 @@ def Signup(request):
         first_name=request.POST['first_name']
         last_name=request.POST['last_name']
         password = request.POST['password1']
-        confirm_password = request.POST['password1']
+        confirm_password = request.POST['password2']
         
         if password != confirm_password:
             return redirect('/register')

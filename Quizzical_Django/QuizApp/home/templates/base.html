@@ -10,7 +10,7 @@
     <title>{% block title %} {% endblock %}</title>
     {% block css %} 
     <style>
-      .head1 {
+      {% comment %} .head1 {
     color: #FBAD30;
     font-size: 2rem;
     font-weight: bold;
@@ -21,11 +21,12 @@
     color: #EF4926;
     font-size: 2rem;
     font-weight: bold;
-  }
+  } {% endcomment %}
     </style>
     {% endblock %}
   </head>
   <body>
+    {% if user.is_authenticated %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/"><img src="{% static 'images/Quizzical_logo2.png'%}" class="rounded-pill" height="100px" width="300px"</a>
@@ -33,7 +34,6 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              {% if user.is_authenticated %}
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                   <a class="nav-link" href="#">Welcome {{request.user}}</a>
@@ -59,14 +59,14 @@
                   {% endif %}
               </ul>
               {% else %}
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% comment %} <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="/signup">Sign Up</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
               </li>
-            </ul>
+            </ul> {% endcomment %}
             {% endif %}
           </div>
         </div>
