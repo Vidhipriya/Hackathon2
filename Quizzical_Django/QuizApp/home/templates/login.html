@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block title %} Login Page {% endblock %}
+{% block css %}
+
+  <header>
+    <style>
+      #intro {
+        background-image: url(data:image/jpeg;base64,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);
+        height: 100vh;
+      }
+
+      /* Height for devices larger than 576px */
+      @media (min-width: 992px) {
+        #intro {
+          margin-top: -58.59px;
+        }
+      }
+
+      .navbar .nav-link {
+        color: #fff !important;
+      }
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+      <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand nav-link" target="_blank" href="#">
+          <strong>Quizzical</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="#intro">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.youtube.com/" rel="nofollow"
+                target="_blank"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" target="_blank"></a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav d-flex flex-row">
+            <!-- Icons -->
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://www.youtube.com/" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://www.facebook.com/" rel="nofollow" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://twitter.com/" rel="nofollow" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://github.com/" rel="nofollow" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+    {% endblock %}
+    {% block body %}
+    <!-- Background image -->
+    <div id="intro" class="bg-image shadow-2-strong">
+      <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-md-8">
+              <form class="bg-white  rounded-5 shadow-5-strong p-5" method="POST" action="/login/">
+                <!-- User input -->{% csrf_token %}
+                <div class="form-outline mb-4">
+                  <input type="text" placeholder="Enter Username" style="text-align: center;"
+                      class="form-control" id="username" name="username" required />
+                  <label class="form-label" for="inputname" class="form-label"  >Username</label>
+                </div>
+                
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input type="password" placeholder="Enter Password" 
+                  class="form-control" id="password" name="password" required/>
+                  <label class="form-label" for="inputname">Password</label>
+                </div>
+
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                  <div class="col d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                      <label class="form-check-label" for="form1Example3">
+                        Remember me
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col text-center">
+                    <!-- Simple link -->
+                    <a href="#!">Forgot password?</a>
+                  </div>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+  </header>
+  <!--Main Navigation-->
+
+  <!--Footer-->
+ 
+  {% endblock %}
