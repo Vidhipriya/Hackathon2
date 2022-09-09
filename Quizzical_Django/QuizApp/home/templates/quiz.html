@@ -4,19 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="https://fonts.googleapis.com/css2?family=Quantico" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <title>{{quiz.name}}</title>
 </head>
 <style>
-.timer{
-    float: right;
-}
-.total{
-    margin-bottom: 5px;
-}
+    .image{
+        margin-left:900px;
+    }
+    .image2{
+        margin-left:150px;
+    }
+    body{
+        background-color:black;
+    }
+  
+
     input[type='radio']:checked:after {
         width: 15px;
         height: 15px;
@@ -30,65 +35,53 @@
         visibility: visible;
         border: 2px solid white;
     }
+    *{
+        font-family: 'Quantico', sans-serif;
+        color:white;
+       
+       }
 
-    .logo {
-        position: relative;
-        bottom: 2rem;
-    }
-
-    .container-fluid {
-        height: 60px;
-    }
-
-    .head1 {
-        color: #FBAD30;
-        font-size: 2rem;
-        font-weight: bold;
-        height: 50px;
-    }
-
-    .head2 {
-        color: #EF4926;
-        font-size: 2rem;
-        font-weight: bold;
-    }
 </style>
 
 {% load static%}
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <div>
-                    <img src="{% static 'images/logo.png' %}" alt="" width="60" height="60"
-                        class="logo d-inline-block align-text-top">
-                    <span class="head1">Quizzical</span> <span class="head2"></span>
-                </div>
-            </a>
-        </div>
+          <a class="navbar-brand" href="/"><img src="{% static 'images/Quizzical_logo2.png'%}" class=" image rounded-pill" height="120px" width="300px"</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="" id="navbarSupportedContent">
+        
     </nav>
-
     <div class="container">
-        <button type="button" class="start btn btn-outline-primary btn-lg start-button mt-3">Click to start the Quiz</button>
-        <h1 class="text-danger mt-3">{{quiz.name}} <span class="badge bg-dark timer" id="hide-time">Seconds Left : <span
-                    id="time-left">{{quiz.time}}</span></span> </h1>
-
-        <hr class="nice" style="display: none;">
-        <div>
+        {% comment %} <img src"https://childbraininjurytrust.org.uk/wp-content/uploads/2020/04/Why-You-Love-Online-Quizzes-825x500-1.jpg" height="1000px" width="100px> {% endcomment %}
+        <a class="navbar-brand" href="/"><img src="https://childbraininjurytrust.org.uk/wp-content/uploads/2020/04/Why-You-Love-Online-Quizzes-825x500-1.jpg" class=" image2 " height="700px" width="1000px"</a><br>
+            <button  style="width:1000px; margin-left:160px;" type="button" class="start btn btn-outline-light btn-lg start-button mt-3" >Click to start the Quiz</button>
+            <br>
+            <br>
+            <br>
+            
+            <br>
+            
+            <h1 class="text-danger mt-3">{{quiz.name}} <span class="badge bg-dark timer" id="hide-time"> <span
+                        id="time-left">{{quiz.time}}</span></span> </h1>
+    
+            <hr class="nice" style="display: none;">
+            <div>
 
             <form id="quiz-form" class="mt-3 mb-3">
                 {% csrf_token %}
                 <div id="quiz-box"></div>
                 <button type="submit" style="display: none;" id="button1" class="btn btn-success mt-3">Submit</button>
-            
             </form>
             <button class="badge bg-dark total" id="total" style="display: none;"></button> 
             <div id="result-box"></div>      
 
         </div>
     </div>
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
@@ -117,8 +110,10 @@
                         <b>${question}</b>
                     </div>
                 `
-                $('.start-button').click(function () {
+                $('.start-button').click(function (e) {
+                     e.preventDefault();    
             $(".ques").show();
+            
         });
                     answers.forEach(answer=>{
                     quizBox.innerHTML += `
@@ -184,13 +179,13 @@ const sendData = () => {
 
     $.ajax({
         type: 'POST',
-        url: '${url}save/',
+        url: 'save/',
         data: data,
         success: function(response){
             const marks = response.marks
             quizForm.classList.add('visible')
-            // totalScore.innerHTML = '<h4>Final Score : ${response.score} Out Of {{quiz.number_of_questions}} marks</h4>'
-            totalScore.innerHTML = 'Hello avi'
+            totalScore.innerHTML = '<h4> Final Score : '+ response.score + ' Out Of {{quiz.number_of_questions}} marks</h4>'
+            
 
 
             marks.forEach(res=>{
@@ -211,11 +206,11 @@ const sendData = () => {
 
                         if (answer == correct) {
                             resDiv.classList.add('bg-success')
-                            resDiv.innerHTML += ' answered: ${answer}'
+                            resDiv.innerHTML += ' Correct answer is : ' + answer
                         } else {
                             resDiv.classList.add('bg-danger')
-                            resDiv.innerHTML += ' | correct answer: ${correct}'
-                            resDiv.innerHTML += ' | answered: ${answer}'
+                            resDiv.innerHTML += ' | correct answer is : '+ correct
+                            resDiv.innerHTML += ' | You answered: ' + answer
                         }
                     }
                 }

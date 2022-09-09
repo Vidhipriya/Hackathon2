@@ -8,6 +8,7 @@
 
   body {
     background: #111;
+    color:white;
   }
 
   .card {
@@ -60,6 +61,14 @@
   .container-fluid {
     height: 60px;
   }
+  *{
+    font-family: 'Quantico', sans-serif;
+    
+   }
+  .modal-body{
+    color:black;
+  }
+
 </style>
 {% endblock %}
 {% load static %}
@@ -77,14 +86,14 @@
       {% if user.is_authenticated %}
       
       <div class="modal-body" id="modal-body">
-      </div>
+      can you see this messages</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" id="start-quiz" class="btn btn-primary">Start Quiz</button>
       </div>
       {% else %}
       <div class="modal-body">
-        <h3>Login first to start the quiz</h3>
+        <h3><a href="/login">Login</a> first to start the quiz</h3>
       </div>
       {% endif %}
     </div>

@@ -7,9 +7,10 @@ urlpatterns = [
     path('<int:myid>/data/', views.quiz_data_view, name='quiz-data'),
     path('<int:myid>/save/', views.save_quiz_view, name='quiz-save'),
     
-    path("signup/", views.Signup, name="signup"),
+    path("signup/", views.Signup, name="signup"), 
     path("login/", views.Login, name="login"),
     path("logout/", views.Logout, name="logout"),
+    path("error", views.error, name = "error"),
     
     path('add_quiz/', views.add_quiz, name='add_quiz'),    
     path('add_question/', views.add_question, name='add_question'),  

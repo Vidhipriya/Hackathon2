@@ -1,3 +1,4 @@
+from cmd import PROMPT
 from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
@@ -7,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import QuizForm, QuestionForm
 from django.forms import inlineformset_factory
 import urllib.parse
+from django.contrib import messages 
 
 
 def index(request):
@@ -32,6 +34,8 @@ def quiz_data_view(request, myid):
         'time': quiz.time,
     })
 
+def error (request):
+    return render (request, "error.html" )
 
 def save_quiz_view(request, myid):
     if request.is_ajax():
@@ -88,7 +92,8 @@ def Signup(request):
         confirm_password = request.POST['password2']
         
         if password != confirm_password:
-            return redirect('/register')
+            
+            return redirect('/error')
         
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name
